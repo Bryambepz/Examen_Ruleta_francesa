@@ -6,6 +6,7 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -34,15 +34,24 @@ public class Jugador implements Serializable {
     private String nombre;
     @Column(name = "Direccion")
     private String Direccion;
+    @Column(name = "Tipo_Juego")
+    private String tipoJuego;
+    @Column(name = "Numero_Seleccionado")
+    private int numApost;
     @Column(name = "Saldo")
     private double saldo;
     @Column(name = "Bancarrota")
     private boolean bancarrota;
+    @Column(name = "NumeroGanadas")
+    private int nGanadas;
+    @Column(name = "NumeroPerdidas")
+    private int nPerdidas;
+    @OneToOne
+    @JoinColumn(name = "fk_Apuesta")
+    private Apuestas apuesta ;
     @OneToOne
     @JoinColumn(name = "fk_Banca")
-    private Banca banca;
-    @OneToMany(mappedBy = "Jugador", cascade = CascadeType.ALL)
-    private List<Apuestas> listaApuestas;
+    private Banca banca ;
             
     public Jugador() {
     }
@@ -54,26 +63,21 @@ public class Jugador implements Serializable {
         this.saldo = saldo;
         this.bancarrota = bancarrota;
     }
-    
-//    public Jugador(String cedula, String nombre, String Direccion, double saldo, boolean bancarrota, Banca b) {
-//        this.cedula = cedula;
-//        this.nombre = nombre;
-//        this.Direccion = Direccion;
-//        this.saldo = saldo;
-//        this.bancarrota = bancarrota;
-//        this.banca = b;
-//    }
-//
-    public Jugador(String cedula, String nombre, String Direccion, double saldo, boolean bancarrota, Banca banca, List<Apuestas> listaApuestas) {
+
+    public Jugador(String cedula, String nombre, String Direccion, String tipoJuego, int numSelec, double saldo, boolean bancarrota, int nGanadas, int nPerdidas, Apuestas apuesta, Banca banca) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.Direccion = Direccion;
+        this.tipoJuego = tipoJuego;
+        this.numApost = numSelec;
         this.saldo = saldo;
         this.bancarrota = bancarrota;
+        this.nGanadas = nGanadas;
+        this.nPerdidas = nPerdidas;
+        this.apuesta = apuesta;
         this.banca = banca;
-        this.listaApuestas = listaApuestas;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -106,6 +110,22 @@ public class Jugador implements Serializable {
         this.Direccion = Direccion;
     }
 
+    public String getTipoJuego() {
+        return tipoJuego;
+    }
+
+    public void setTipoJuego(String tipoJuego) {
+        this.tipoJuego = tipoJuego;
+    }
+
+    public int getNumApost() {
+        return numApost;
+    }
+
+    public void setNumApost(int numSelec) {
+        this.numApost = numSelec;
+    }
+
     public double getSaldo() {
         return saldo;
     }
@@ -122,20 +142,36 @@ public class Jugador implements Serializable {
         this.bancarrota = bancarrota;
     }
 
+    public int getnGanadas() {
+        return nGanadas;
+    }
+
+    public void setnGanadas(int nGanadas) {
+        this.nGanadas = nGanadas;
+    }
+
+    public int getnPerdidas() {
+        return nPerdidas;
+    }
+
+    public void setnPerdidas(int nPerdidas) {
+        this.nPerdidas = nPerdidas;
+    }
+
+    public Apuestas getApuesta() {
+        return apuesta;
+    }
+
+    public void setApuesta(Apuestas apuesta) {
+        this.apuesta = apuesta;
+    }
+
     public Banca getBanca() {
         return banca;
     }
 
     public void setBanca(Banca banca) {
         this.banca = banca;
-    }
-
-    public List<Apuestas> getListaApuestas() {
-        return listaApuestas;
-    }
-
-    public void setListaApuestas(List<Apuestas> listaApuestas) {
-        this.listaApuestas = listaApuestas;
     }
 
     @Override

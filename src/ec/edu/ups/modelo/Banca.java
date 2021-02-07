@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,11 +31,18 @@ public class Banca implements Serializable {
     private boolean bancarrota;
     @Column(name = "Comenzar_Apuesta")
     private boolean comenzar_Apuesta;
-
+    
     public Banca() {
     }
 
     public Banca(double saldo, boolean bancarrota, boolean comenzar_Apuesta) {
+        this.saldo = saldo;
+        this.bancarrota = bancarrota;
+        this.comenzar_Apuesta = comenzar_Apuesta;
+    }
+
+    public Banca(Long id, double saldo, boolean bancarrota, boolean comenzar_Apuesta) {
+        this.id = id;
         this.saldo = saldo;
         this.bancarrota = bancarrota;
         this.comenzar_Apuesta = comenzar_Apuesta;
@@ -70,6 +79,14 @@ public class Banca implements Serializable {
     public void setComenzar_Apuesta(boolean comenzar_Apuesta) {
         this.comenzar_Apuesta = comenzar_Apuesta;
     }
+
+//    public Jugador getJugador() {
+//        return jugador;
+//    }
+//
+//    public void setJugador(Jugador jugador) {
+//        this.jugador = jugador;
+//    }
 
     @Override
     public int hashCode() {

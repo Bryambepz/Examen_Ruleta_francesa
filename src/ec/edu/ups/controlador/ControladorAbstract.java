@@ -53,14 +53,14 @@ public abstract class ControladorAbstract<T> {
 //        return true;
 //    }
 //    
-//    public T update(T objeto){
-//        em.getTransaction().begin();
-//        objeto = em.merge(objeto);
-//        em.getTransaction().commit();
-//        this.findAll();
-//        return objeto;
-//    }
-//    
+    public T update(T objeto){
+        em.getTransaction().begin();
+        objeto = em.merge(objeto);
+        em.getTransaction().commit();
+        this.findAll();
+        return objeto;
+    }
+    
     public T read(Object id){
         return (T) em.find(clase, id);
     }

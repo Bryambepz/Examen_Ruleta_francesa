@@ -29,17 +29,8 @@ public class Apuestas implements Serializable {
     private double dinero_Apostado;
     @Column(name = "Tipo_Juego")
     private String tipo_Juego;
-    @ManyToOne
-    @JoinColumn(name = "fk_Jugador")
-    private Jugador jugador;
     
     public Apuestas() {
-    }
-
-    public Apuestas(double dinero_Apostado, String tipo_Juego, Jugador jugador) {
-        this.dinero_Apostado = dinero_Apostado;
-        this.tipo_Juego = tipo_Juego;
-        this.jugador = jugador;
     }
 
     public Apuestas(double dinero_Apostado, String tipo_Juego) {
@@ -71,13 +62,13 @@ public class Apuestas implements Serializable {
         this.tipo_Juego = tipo_Juego;
     }
 
-    public Jugador getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
-    }
+//    public Jugador getJugador() {
+//        return jugador;
+//    }
+//
+//    public void setJugador(Jugador jugador) {
+//        this.jugador = jugador;
+//    }
 
     @Override
     public int hashCode() {
