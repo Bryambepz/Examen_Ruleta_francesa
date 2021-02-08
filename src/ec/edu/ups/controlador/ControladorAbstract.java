@@ -21,6 +21,7 @@ public abstract class ControladorAbstract<T> {
     private Class<T> clase;
     private EntityManager em;
 
+    ///
     public ControladorAbstract() {
         listaObjetos = new ArrayList<>();
         Type t = getClass().getGenericSuperclass();
